@@ -1,0 +1,157 @@
+[
+    {
+        "id": "25f29b1d67b560e5",
+        "type": "tab",
+        "label": "Flow 6",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "801d32b840b8deaf",
+        "type": "ui_text",
+        "z": "25f29b1d67b560e5",
+        "group": "bd0e51becd08e08a",
+        "order": 0,
+        "width": "6",
+        "height": "6",
+        "name": "Current Time",
+        "label": "Current Time",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "Arial Black,Arial Black,Gadget,sans-serif",
+        "fontSize": "18",
+        "color": "#000000",
+        "x": 590,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a5b15f7b38cb5540",
+        "type": "inject",
+        "z": "25f29b1d67b560e5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 40,
+        "wires": [
+            [
+                "b7b94f92c58993f8",
+                "f779d284b63416d8"
+            ]
+        ]
+    },
+    {
+        "id": "b7b94f92c58993f8",
+        "type": "debug",
+        "z": "25f29b1d67b560e5",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "ebfdd74b7c916367",
+        "type": "debug",
+        "z": "25f29b1d67b560e5",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "f779d284b63416d8",
+        "type": "http request",
+        "z": "25f29b1d67b560e5",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://api.api-ninjas.com/v1/worldtime?lat=17.9784&lon=79.5941&X-Api-Key=CuZnOZ40k9xecP3alB6Gg1NZxg1mZY5oaMduNqZL",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 130,
+        "y": 240,
+        "wires": [
+            [
+                "ebfdd74b7c916367",
+                "bb183230325f47af"
+            ]
+        ]
+    },
+    {
+        "id": "bb183230325f47af",
+        "type": "function",
+        "z": "25f29b1d67b560e5",
+        "name": "function 3",
+        "func": "var datetime = JSON.parse(msg.payload).datetime;\nmsg.payload = datetime;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 180,
+        "wires": [
+            [
+                "801d32b840b8deaf"
+            ]
+        ]
+    },
+    {
+        "id": "bd0e51becd08e08a",
+        "type": "ui_group",
+        "name": "Current Time Display",
+        "tab": "0e86661e92f847b6",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0e86661e92f847b6",
+        "type": "ui_tab",
+        "name": "Current Time Display",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
